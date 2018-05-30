@@ -8,6 +8,11 @@ const data = {
   isSimple: 0,
   playerName: '',
   playerId: '',
+  imgData: {
+    img0: toImg('images/flappybird/bird1_0.png'),
+    img1: toImg('images/flappybird/bird1_1.png'),
+    img2: toImg('images/flappybird/bird1_2.png'),
+  },
 };
 
 const initData = {
@@ -98,6 +103,11 @@ data.list = [
     h: 44,
     w: 24,
   },
+  {
+    type: 'playersName',
+    x: 0,
+    y: 0,
+  }
 ]
 
 export default data

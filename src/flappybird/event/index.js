@@ -23,6 +23,13 @@ const eventsOpe = {
     const list = [data0, data1, data2, data.initOnePipe({x: 400, ...option}), ...others]
     return {...data, list}
   },
+  updatePlayers: (data, option) => {
+    let list = data.list
+    const objN = _.findIndex(list, e => e.type === 'players')
+    let _obj = list[objN]
+    list[objN] = {...list[objN], list: option.data}
+    return {...data, list}
+  },
 }
 
 const dealEvents = (data, eventsList = []) => {

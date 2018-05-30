@@ -13,6 +13,11 @@ const imgUpdate = data => ({...data, imgNum: data.imgNum > 1 ? 0 : data.imgNum +
 const __update = {
   bullet: _.flowRight(addInterval(1)(_.flowRight(updateSelf(),  changeRotate, bounce)), addInterval(5, 'img11')(imgUpdate)),
 
+  players: (data, _else) => ({
+    ...data,
+    list: data.list.filter(e => e.playerId !== _else.playerId).map(e => ({...e, data: _.flowRight(addInterval(1)(_.flowRight(updateSelf(),  changeRotate, bounce)), addInterval(5, 'img11')(imgUpdate))(e.data)}))
+  }),
+
   backImg: (data, _else) => _else.state === 3 ? data : data.x < -getCanvas().width ? ({...data, x: 0}) : _.flowRight(addInterval(1)(updateSelf()))(data),
 
   pipe: (data, _else) => _.flowRight(addInterval(1)(updateSelf()))(data),

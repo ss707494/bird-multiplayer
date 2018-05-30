@@ -1,27 +1,49 @@
+import _ from 'lodash'
 import common from '../lib/common.js'
 const {f_log, randomInt, toImg, getCanvas} = common
 
 const render = (ctx, {list, state, objName, ..._else}) => {
   list.map(({type, ...data}) => {
     if (__render[type]) {
-      __render[type](ctx, data, state, _else)
+      __render[type](ctx, data, state, {..._else, list})
     }
   })
 }
 
 const _collision = data => data
 
+const drawOnePlay = (option = 1) => (ctx, data, state, _else) => {
+  if (state === 0) return
+  const {img, imgNum, x, y, w = 20, h = 50, angle = 40} = data
+  ctx.save()
+  ctx.globalAlpha = option
+  ctx.translate(x + w / 2,  y + h / 2)
+  ctx.rotate(angle * Math.PI / 180)
+  const _data0 = _else.imgData
+  ctx.drawImage(_data0['img' + imgNum], - w / 2, - h / 2, w, h)
+  ctx.font="18px Georgia";
+  ctx.fillText(_else.playerName,  - w / 2, - h / 2)
+  ctx.globalAlpha = 1
+  ctx.restore()
+}
+
 const __render = {
   bullet: (ctx, data, state, _else) => {
+    drawOnePlay(1)(ctx, data, state, _else)
+  },
+  players: (ctx, data, state, _else) => {
     if (state === 0) return
-    const {img, imgNum, x, y, w = 20, h = 50, angle = 40} = data
-    ctx.save()
-    ctx.translate(x + w / 2,  y + h / 2)
-    ctx.rotate(angle * Math.PI / 180)
-    ctx.drawImage(data['img' + imgNum], - w / 2, - h / 2, w, h)
-    ctx.font="18px Georgia";
-    ctx.fillText(_else.playerName,  - w / 2, - h / 2)
-    ctx.restore()
+    data.list.filter(e => e.playerId !== _else.playerId).map((e, i) => {
+      drawOnePlay(0.4)(ctx, e.data, state, _else)
+    })
+  },
+  playersName: (ctx, data, state, _else) => {
+    _.find(_else.list, e => e.type === 'players').list.map((e,i) => {
+      ctx.save()
+      ctx.font="18px Georgia";
+      ctx.fillText(_else.playerName, 20, i * 10)
+      ctx.restore()
+    })
   },
   backImg: (ctx, data) => {
     const {img, x, y, w = 20, h = 50} = data

@@ -9,8 +9,7 @@ export default (window) => {
 
   socket.on('updatePlayers', players => {
     console.log(players);
-    // window.eventsL.push({type: 'addPipe', option: data})
-
+    window.eventsL.push({type: 'updatePlayers', option: {data: players}})
   })
 
   socket.on('addPipe', data => {
