@@ -24,7 +24,7 @@ const __update = {
 }
 
 const update = ({list, ..._else}) => {
-  let _list = _.map(list, (data) => !__update[data.type] ? data : __update[data.type](data, _else))
+  let _list = _.map(_.filter(list, e => (e.type !== 'pipe' || e.x > -100)), (data) => !__update[data.type] ? data : __update[data.type](data, _else))
   return {..._else, list: _list}
 }
 

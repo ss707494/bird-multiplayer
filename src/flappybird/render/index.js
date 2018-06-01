@@ -22,26 +22,32 @@ const drawOnePlay = (option = 1) => (ctx, data, state, _else) => {
   const _data0 = _else.imgData
   ctx.drawImage(_data0['img' + imgNum], - w / 2, - h / 2, w, h)
   ctx.font="18px Georgia";
-  ctx.fillText(_else.playerName,  - w / 2, - h / 2)
+  ctx.fillText(data.name || _else.playerName,  - w / 2, - h / 2)
   ctx.globalAlpha = 1
   ctx.restore()
 }
 
 const __render = {
   bullet: (ctx, data, state, _else) => {
+    if (state === 4) return
     drawOnePlay(1)(ctx, data, state, _else)
   },
   players: (ctx, data, state, _else) => {
-    if (state === 0) return
+    if (state === 0 ) return
     data.list.filter(e => e.playerId !== _else.playerId).map((e, i) => {
-      drawOnePlay(0.4)(ctx, e.data, state, _else)
+      if (e.data.overTime) return
+      drawOnePlay(0.4)(ctx, {name:e.playerName, ...e.data}, state, _else)
     })
   },
   playersName: (ctx, data, state, _else) => {
     _.find(_else.list, e => e.type === 'players').list.map((e,i) => {
       ctx.save()
+      if (_.get(data, 'data.overTime')) {
+        ctx.fillStyle = "#f00";
+      }
       ctx.font="18px Georgia";
-      ctx.fillText(_else.playerName, 20, i * 10)
+      ctx.fillText(e.playerName, 20, i * 10)
+      ctx.fillStyle = "#000";
       ctx.restore()
     })
   },

@@ -14,7 +14,11 @@ const collision = data => {
     const {x, w, y, space, thickness = 5, pass} = e
     const __judge = _isIn(x + thickness, y - thickness, w - 2 * thickness, space + 2 * thickness)
     if (__judge(x_p, y_p) || __judge(x_p + w_p, y_p) || __judge(x_p, y_p + h_p) || __judge(x_p + w_p, y_p + h_p)) {
-      data.state = 2
+      if (!data.isSimple) {
+        data.state = 4
+      }else {
+        data.state = 2
+      }
     }
     if (pass === 0 && x_p > x + w / 2) {
       data.score = data.score + 1

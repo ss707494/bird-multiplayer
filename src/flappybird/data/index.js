@@ -72,7 +72,7 @@ data.list = [
     w: 48,
     h: 48,
     a_y: .8,
-    c_v_y: - getCanvas().height * .015,
+    c_v_y: -12,
 
   },
   // _initOnePipe({x: getCanvas().width + 10}),

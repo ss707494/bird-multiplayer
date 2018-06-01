@@ -15,7 +15,8 @@ let ctx,
     isSimple,
     playerName,
     playerId,
-    socket
+    socket,
+    hasOver = 0;
 
 let data = {...adata};
 let eventsL = eventsList;
@@ -39,8 +40,8 @@ export default function Main2() {
       }else {
         socket.emit('initClient', { playerName, data: _.find(data.list, e => e.type === 'bullet') }, (id, data) => {
           playerId = id
+          initGame();
         });
-        initGame();
       }
     }, 3000)
   }else {
@@ -70,6 +71,10 @@ const main = _ => {
     window.cancelAnimationFrame(aniId)
     return
   }
+  if (!hasOver && data.state === 4) {
+    hasOver = 1;
+    socket.emit('gameover', data);
+  }
   aniId = window.requestAnimationFrame(main)
   return data;
 }
@@ -88,6 +93,9 @@ const bindEvent = () => {
       data = ({...data, score: 0, state: data.isSimple ? 1 : 1, list: data.list.filter(e => e.type !== 'pipe')});
       main();
       return
+    }
+    if (socket && socket.connected) {
+      socket.emit('playerTap', data);
     }
     window.eventsL = touchHandler(e, data)
   }

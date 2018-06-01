@@ -13,8 +13,23 @@ export default (window) => {
   })
 
   socket.on('addPipe', data => {
-    console.log('addPipe from server')
+    console.log('addPipe');
     window.eventsL.push({type: 'addPipe', option: data})
+  })
+
+  socket.on('playerTap', data => {
+    console.log('playerTap', data);
+    window.eventsL.push({type: 'playerTap', option: data})
+  })
+
+  socket.on('gameover', data => {
+    console.log('gameover', data);
+    window.eventsL.push({type: 'gameover', option: data})
+  })
+
+  socket.on('AllOver', data => {
+    console.log('AllOver', data);
+    window.eventsL.push({type: 'AllOver', option: data})
   })
 
   return socket
