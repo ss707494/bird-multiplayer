@@ -1,0 +1,46 @@
+body, html, #root, .App {
+  height: 100%;
+}
+
+@fontSize: 4px;
+
+.lesson_box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .text {
+    font-size: 7 * @fontSize;
+    height: 100%;
+    width: 60%;
+    overflow: auto;
+    header {
+      text-align: center;
+    }
+    section {
+      li {
+        text-align: left;
+      }
+      pre {
+        background: #eee;
+      }
+      code {
+        line-height: 15 * @fontSize;
+        padding: 15px;
+      }
+      .content {
+        font-size: 5 * @fontSize;
+      }
+    }
+  }
+  .canvas {
+    height: 100%;
+    width: 40%;
+    text-align: center;
+    canvas {
+      //width: 400px;
+      //height: 500px;
+      border: 1px solid;
+    }
+  }
+}
+

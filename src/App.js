@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './flappy-bird-logo.png';
 import './App.css';
 import Flappy from './flappybird/flappybird'
+import Lesson from './canvas_websocket_lesson'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Flappy/>
+        {
+          (data => data ? <Lesson /> : <Flappy />)(1)
+        }
+        {/*<Flappy/>*/}
       </div>
     );
   }

@@ -1,0 +1,42 @@
+body,
+html,
+#root,
+.App {
+  height: 100%;
+}
+.lesson_box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.lesson_box .text {
+  font-size: 28px;
+  height: 100%;
+  width: 60%;
+  overflow: auto;
+}
+.lesson_box .text header {
+  text-align: center;
+}
+.lesson_box .text section li {
+  text-align: left;
+}
+.lesson_box .text section pre {
+  background: #eee;
+}
+.lesson_box .text section code {
+  line-height: 60px;
+  padding: 15px;
+}
+.lesson_box .text section .content {
+  font-size: 20px;
+}
+.lesson_box .canvas {
+  height: 100%;
+  width: 40%;
+  text-align: center;
+}
+.lesson_box .canvas canvas {
+  border: 1px solid;
+}
+/*# sourceMappingURL=style.css.map */

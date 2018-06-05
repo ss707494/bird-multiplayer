@@ -42,7 +42,7 @@ const __render = {
   playersName: (ctx, data, state, _else) => {
     _.find(_else.list, e => e.type === 'players').list.map((e,i) => {
       ctx.save()
-      if (_.get(data, 'data.overTime')) {
+      if (_.get(e, 'data.overTime')) {
         ctx.fillStyle = "#f00";
       }
       ctx.font="18px Georgia";

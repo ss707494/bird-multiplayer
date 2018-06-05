@@ -62,13 +62,12 @@ io.on('connection', function(socket){
     }
   })
 
-
 });
 
 setInterval(() => {
   if (!state) return
   io.emit('addPipe', {space_g: randomInt(80), y_g: randomInt(180)})
-}, 6000)
+}, 5000)
 
 http.listen(3001, function(){
   console.log('listening on *:3001');
