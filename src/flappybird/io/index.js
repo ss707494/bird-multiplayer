@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 export default (window) => {
 
-  var socket = io.connect('http://192.168.3.105:3001');
+  var socket = io.connect('http://104.225.154.119:3001');
 
   socket.on('updatePlayers', players => {
     console.log(players);
