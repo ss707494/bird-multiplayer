@@ -10,7 +10,7 @@ html,
   display: flex;
 }
 .lesson_box .text {
-  font-size: 28px;
+  font-size: 14px;
   height: 100%;
   width: 60%;
   overflow: auto;
@@ -25,11 +25,11 @@ html,
   background: #eee;
 }
 .lesson_box .text section code {
-  line-height: 60px;
+  line-height: 30px;
   padding: 15px;
 }
 .lesson_box .text section .content {
-  font-size: 20px;
+  font-size: 10px;
 }
 .lesson_box .canvas {
   height: 100%;

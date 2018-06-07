@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import common from '../lib/common.js'
-const {f_log} = common
+const {f_log, getCanvas} = common
 
 const eventsList = []
 
@@ -20,7 +20,7 @@ const eventsOpe = {
   },
   addPipe: (data, option) => {
     const [data0, data1, data2, ...others] = data.list
-    const list = [data0, data1, data2, data.initOnePipe({x: 700, ...option}), ...others]
+    const list = [data0, data1, data2, data.initOnePipe({x: getCanvas().width + 10, ...option}), ...others]
     return {...data, list}
   },
   updatePlayers: (data, option) => {
@@ -55,16 +55,19 @@ const eventsOpe = {
     if (_obj) {
       const index = _.findIndex(_obj.list, e => e.playerId === playerId);
       // console.log('old', _.get(list, [objN, 'list', index, 'data']))
-      list = _.set(list, [objN, 'list', index, 'data'], {...newData, overTime: option.time} );
+      list = _.set(list, [objN, 'list', index, 'isOver'], option.time);
       // console.log('new', newData);
     }
     return {...data, list}
   },
   AllOver: (data, option) => {
-    const res = option.sort((e1, e2) => e1.time - e2.time).map((e,i) => i + '. name: ' + e.playerName + ' score:' + e.score + '\n'
+    const res = option.sort((e1, e2) => e1.time - e2.time).map((e,i) => (i+1) + '. name: ' + e.playerName + ' score:' + e.score + '\n'
     ).join('')
     alert(res);
-    return {...data, state: 2};
+    let list = data.list
+    const objN = _.findIndex(list, e => e.type === 'players')
+    data.list[objN].list = data.list[objN].list.map(e => _.set(e, 'isOver', ''))
+    return {...data, score: 0, list: data.list.filter(e => e.type !== 'pipe'), state: 1, hasOver: 0};
   },
 }
 

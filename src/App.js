@@ -6,10 +6,11 @@ import Lesson from './canvas_websocket_lesson'
 
 class App extends Component {
   render() {
+    const data = window.location.hash.replace('#', '') || '1';
     return (
       <div className="App">
         {
-          (data => data ? <Lesson /> : <Flappy />)(1)
+          (data => data === '1' ? <Lesson /> : <Flappy />)(data)
         }
         {/*<Flappy/>*/}
       </div>

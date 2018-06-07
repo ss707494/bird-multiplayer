@@ -15,8 +15,7 @@ let ctx,
     isSimple,
     playerName,
     playerId,
-    socket,
-    hasOver = 0;
+    socket;
 
 let data = {...adata};
 let eventsL = eventsList;
@@ -24,26 +23,27 @@ window.eventsL = eventsL;
 let aniId;
 
 export default function Main2() {
-  // isSimple = !window.confirm("多人模式");
+  isSimple = !window.confirm("多人模式");
   // isSimple = true
-  playerName = 'ss'
-  // playerName = window.prompt('请输入名字:', '');
+  // playerName = 'ss'
+  playerName = window.prompt('请输入名字:', '');
   if (!isSimple) {
     socket = initSocket(window)
+    socket.on('connected', () => {
+      socket.emit('initClient', { playerName, data: _.find(data.list, e => e.type === 'bullet') }, (id, data) => {
+        playerId = id
+        initGame();
+      });
+    })
     setTimeout(() => {
       if (!socket.connected) {
-        // alert('未连接服务器, 启动单机模式');
+        alert('未连接服务器, 启动单机模式');
         socket.close()
         isSimple = true
         addPipe();
         initGame();
-      }else {
-        socket.emit('initClient', { playerName, data: _.find(data.list, e => e.type === 'bullet') }, (id, data) => {
-          playerId = id
-          initGame();
-        });
       }
-    }, 3000)
+    }, 30000)
   }else {
     addPipe();
     initGame();
@@ -71,8 +71,8 @@ const main = _ => {
     window.cancelAnimationFrame(aniId)
     return
   }
-  if (!hasOver && data.state === 4) {
-    hasOver = 1;
+  if (!data.hasOver && data.state === 4) {
+    data.hasOver = 1;
     socket.emit('gameover', data);
   }
   aniId = window.requestAnimationFrame(main)

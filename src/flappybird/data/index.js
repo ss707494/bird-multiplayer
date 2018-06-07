@@ -4,6 +4,7 @@ const {f_log, randomInt, toImg, getCanvas} = common
 const data = {
   score: 0,
   state: 0, // 0:未开始  1:运行  2:over 3:准备(多人)
+  hasOver: 0,
   num: 1,
   isSimple: 0,
   playerName: '',

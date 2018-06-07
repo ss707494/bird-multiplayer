@@ -35,18 +35,26 @@ const __render = {
   players: (ctx, data, state, _else) => {
     if (state === 0 ) return
     data.list.filter(e => e.playerId !== _else.playerId).map((e, i) => {
-      if (e.data.overTime) return
+      if (e.isOver) return
       drawOnePlay(0.4)(ctx, {name:e.playerName, ...e.data}, state, _else)
     })
   },
   playersName: (ctx, data, state, _else) => {
+    ctx.save()
+    if (state === 4) {
+      ctx.fillStyle = "#f00";
+    }
+    ctx.font="18px Georgia";
+    ctx.fillText(_else.playerName, 20, 20)
+    ctx.fillStyle = "#000";
+    ctx.restore()
     _.find(_else.list, e => e.type === 'players').list.map((e,i) => {
       ctx.save()
-      if (_.get(e, 'data.overTime')) {
+      if (_.get(e, 'isOver')) {
         ctx.fillStyle = "#f00";
       }
       ctx.font="18px Georgia";
-      ctx.fillText(e.playerName, 20, i * 10)
+      ctx.fillText(e.playerName, 20, i * 20 + 40)
       ctx.fillStyle = "#000";
       ctx.restore()
     })
