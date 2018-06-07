@@ -26,7 +26,8 @@ export default function Main2() {
   isSimple = !window.confirm("多人模式");
   // isSimple = true
   // playerName = 'ss'
-  playerName = window.prompt('请输入名字:', '');
+  playerName = window.prompt('请输入名字:', localStorage.getItem('name') || '');
+  localStorage.setItem('name', playerName)
   if (!isSimple) {
     socket = initSocket(window)
     socket.on('connected', () => {
@@ -50,8 +51,11 @@ export default function Main2() {
   }
 }
 
+let hasInit = 0
 const initGame = () => {
   data = {...data, isSimple, playerName, playerId}
+  if (hasInit) return
+  hasInit = 1
   window.canvas = document.getElementById('canv_f')
   const canvas = document.getElementById('canv_f')
   ctx = document.getElementById('canv_f').getContext('2d')
@@ -90,6 +94,7 @@ const bindEvent = () => {
     e.preventDefault()
     if (data.state === 2 || data.state === 0) {
       window.cancelAnimationFrame(aniId)
+        window.eventsL = []
       data = ({...data, score: 0, state: data.isSimple ? 1 : 1, list: data.list.filter(e => e.type !== 'pipe')});
       main();
       return

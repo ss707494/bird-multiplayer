@@ -2,7 +2,7 @@
  * Created by Administrator on 2/18.
  */
 import React, {Component} from 'react'
-import './style.scss'
+import './style.css'
 // import Head from '../../components/Head'
 import Main2 from './main.js'
 // import FlatButton from 'material-ui/FlatButton';

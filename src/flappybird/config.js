@@ -5,8 +5,8 @@
 export default (x => {
   // 根据窗口大小 生成canvas
   // const clientWidth = document.body.clientWidth;
-  const clientWidth = 300 || window.screen.availWidth;
-  const clientHeight = 700 || window.screen.availHeight -20;
+  const clientWidth = 350 || window.screen.availWidth;
+  const clientHeight = 600 || window.screen.availHeight -20;
   // const clientWidth = window.screen.availWidth;
   // const clientHeight = window.screen.availHeight -20;
 	let l,

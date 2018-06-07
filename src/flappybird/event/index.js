@@ -61,7 +61,7 @@ const eventsOpe = {
     return {...data, list}
   },
   AllOver: (data, option) => {
-    const res = option.sort((e1, e2) => e1.time - e2.time).map((e,i) => (i+1) + '. name: ' + e.playerName + ' score:' + e.score + '\n'
+    const res = option.sort((e1, e2) => e2.time - e1.time).map((e,i) => (i+1) + '. name: ' + e.playerName + ' score:' + e.score + '\n'
     ).join('')
     alert(res);
     let list = data.list

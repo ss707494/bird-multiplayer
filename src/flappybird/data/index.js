@@ -37,7 +37,7 @@ const _initOnePipe = ({x, space_g, y_g}) => ({
   pass: 0,
   x: x || 400,
   space: ((space_g || randomInt(80)) + getCanvas().height * .24),
-  y: (getCanvas().height/2 - 200) + (y_g || randomInt(180)),
+  y: (getCanvas().height/2 - 250) + (y_g || randomInt(180)),
   pass: 0
 })
 data.initOnePipe = _initOnePipe
