@@ -311,8 +311,8 @@ class Lesson extends Component {
   componentDidMount() {
     lesson_canvas = window.lesson_canvas = this.lesson_canvas
     ctx = window.ctx = this.lesson_canvas.getContext('2d');
-    var objDiv = document.getElementById("text");
-    objDiv.scrollTop = objDiv.scrollHeight;
+    // var objDiv = document.getElementById("text");
+    // objDiv.scrollTop = objDiv.scrollHeight;
   }
 
   clickBut = (code, i) => (e) => {

@@ -11,7 +11,7 @@ var http = require('http').Server(app);
 
 var players = []
 var state = 0
-var space = 4
+var space = 5
 var timeId, io
 
 const randomInt = num => ~~(Math.random() * num)
