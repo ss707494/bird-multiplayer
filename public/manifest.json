@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "FlappyBird",
+  "name": "FlappyBird",
   "icons": [
     {
       "src": "favicon.ico",
