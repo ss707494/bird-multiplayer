@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import './style.css';
 import common from '../flappybird/lib/common'
 
-const {toImg} = common;
+const {toImg, alert} = common;
 const win = {
   ctx: '',
   lesson_canvas: '',
@@ -37,6 +37,7 @@ let data = win.data,
     socket
 
 window.io = io;
+window.alert = alert;
 Object.keys(win).map(e => {
   window[e] = win[e];
 })
@@ -62,6 +63,7 @@ window.main = () => {
 }
 
 const test = () => {
+  return
 
   state = 1;
   data = {

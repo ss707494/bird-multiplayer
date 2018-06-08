@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import common from '../lib/common.js'
-const {f_log, getCanvas} = common
+const {f_log, getCanvas, alert} = common
 
 const eventsList = []
 

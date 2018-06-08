@@ -1,6 +1,8 @@
 import config from '../config.js'
-
+import swal from 'sweetalert'
 import imgsrc from '../images/flappybird/index.js'
+
+const alert = swal;
 
 const f_log = data => {
   console.log(data);
@@ -24,5 +26,6 @@ export default {
   randomInt,
   toImg,
   getCanvas,
+  alert,
 }
 

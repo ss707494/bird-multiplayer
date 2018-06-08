@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
-// var io = require('socket.io')();
+import common from '../lib/common'
 
-// require('socket.io-client')
+const {alert} = common
 
 export default (window) => {
 

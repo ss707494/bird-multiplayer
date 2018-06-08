@@ -8,7 +8,7 @@ import _event from './event/index.js'
 import collision from './collision/index.js'
 import config from './config.js'
 window._ = _
-const {f_log, randomInt, getCanvas} = common
+const {f_log, randomInt, getCanvas, alert} = common
 const { touchHandler, eventsList, dealEvents } = _event
 
 let ctx,
@@ -23,11 +23,35 @@ window.eventsL = eventsL;
 let aniId;
 
 export default function Main2() {
-  isSimple = !window.confirm("多人模式");
+  alert('请选择模式', {
+    buttons: {
+      one: {
+        text: '单人',
+        value: '1',
+      },
+      two: {
+        text: '多人',
+        value: '2',
+      }
+    }
+  }).then(value => {
+    isSimple = value !== '2'
+    alert('请输入名字:', {
+      content: {
+        element: "input",
+      }
+    }).then(v => {
+      playerName = v || ('**' + Math.floor(Math.random()*100))
+      main0();
+    })
+  })
+}
+function main0() {
+  // isSimple = !window.confirm("多人模式");
   // isSimple = true
   // playerName = 'ss'
-  playerName = window.prompt('请输入名字:', localStorage.getItem('name') || '');
-  localStorage.setItem('name', playerName)
+  // playerName = window.prompt('请输入名字:', localStorage.getItem('name') || '');
+  // localStorage.setItem('name', playerName)
   if (!isSimple) {
     socket = initSocket(window)
 
@@ -97,7 +121,7 @@ const bindEvent = () => {
     e.preventDefault()
     if (data.state === 2 || data.state === 0) {
       window.cancelAnimationFrame(aniId)
-        window.eventsL = []
+      window.eventsL = []
       data = ({...data, score: 0, state: data.isSimple ? 1 : 1, list: data.list.filter(e => e.type !== 'pipe')});
       main();
       return

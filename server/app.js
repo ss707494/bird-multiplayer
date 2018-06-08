@@ -49,9 +49,6 @@ app.get('/init', function (req, res) {
       data.playerId = socket.id
       players = [...players, data]
 
-      // const __data = data.data
-      // __data.v_y = 10;
-      // players.push({playerId: 'test', playerName: 'test', data: __data})
       console.log(players);
       console.log(players.length);
       fn(socket.id, players)
@@ -85,13 +82,6 @@ app.get('/init', function (req, res) {
   });
   res.send();
   return
-  // state = !state
-  // players = []
-  // state = 0
-  // server.close(() => {
-  //   io = server(http);
-  // })
-  // res.send();
 })
 app.get('/', function(req, res){
   res.send('<h1>Hello world</h1>' +
@@ -106,45 +96,5 @@ app.get('/', function(req, res){
 http.listen(3001, function(){
   console.log('listening on *:3001');
 });
-return
-// io = server(http);
-io.on('connection', function(socket){
-  console.log('a user connected id: ' + socket.id);
-  socket.on('initClient', (data, fn) => {
-    data.playerId = socket.id
-    players = [...players, data]
-
-    // const __data = data.data
-    // __data.v_y = 10;
-    // players.push({playerId: 'test', playerName: 'test', data: __data})
-    console.log(players);
-    fn(socket.id, players)
-    io.emit('updatePlayers', players)
-  })
-
-  socket.on('playerTap', data => {
-    socket.broadcast.emit('playerTap', data);
-  })
-
-  socket.on('gameover', data => {
-    const time = new Date().getTime();
-    players = players.map(e => e.playerId !== data.playerId ? e : _.set(_.set(e, 'isOver', time), 'score', data.score))
-    io.emit('gameover', _.set(data, 'time', time));
-    if (players.filter(e => !e.isOver).length === 0) {
-      state = 0
-      io.emit('AllOver', players);
-      players = players.map(e => e.playerId !== data.playerId ? e : _.set(_.set(e, 'isOver', ''), 'score', 0))
-    }
-  })
-
-  socket.emit('connected');
-
-});
-
-return
-setInterval(() => {
-  if (!state) return
-  io.emit('addPipe', {space_g: randomInt(space * 20), y_g: randomInt(180)})
-}, 5000)
 
 
