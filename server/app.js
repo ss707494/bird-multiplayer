@@ -65,7 +65,7 @@ app.get('/start', function (req, res) {
   res.send();
 })
 app.get('/space--', function (req, res) {
-  space = space > 1 ? space - 1 : 4
+  space = space > 1 ? space - 1 : 5
   console.log('space--');
   res.send(''+space);
 })
@@ -75,7 +75,7 @@ app.get('/init', function (req, res) {
   clearInterval(timeId);
   players = [];
   state = 0;
-  space = 4
+  space = 5
   io = server(http);
   io.on('connection', function(socket){
     console.log('a user connected id: ' + socket.id);
