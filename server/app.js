@@ -133,7 +133,7 @@ app.get('/', function(req, res){
       '<div><button onclick="fetch(\'start\')">start</button></div>' +
       '<div><button onclick="fetch(\'startServer\')">startServer</button></div>' +
       '<div><button onclick="fetch(\'init\')">init</button></div>' +
-      '<div><button onclick="fetch(\'space--\'">space--</button></div>' +
+      '<div><button onclick="fetch(\'space--\')">space--</button></div>' +
       '') + players.map(e => '<div>'+e.playerName+'</div>').join('') + '<div>' + players.length + '</div>'
 });
 
