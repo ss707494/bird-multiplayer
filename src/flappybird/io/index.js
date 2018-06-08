@@ -6,10 +6,17 @@ import io from 'socket.io-client';
 export default (window) => {
 
   var socket = io.connect('http://104.225.154.119:3001');
+  // var socket = io.connect('http://localhost:3001');
 
   socket.on('updatePlayers', players => {
     console.log(players);
     window.eventsL.push({type: 'updatePlayers', option: {data: players}})
+  })
+
+  socket.on('nameRepeat', data => {
+    console.log('nameRepeat');
+    alert('重名了')
+    window.location.reload();
   })
 
   socket.on('addPipe', data => {

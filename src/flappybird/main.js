@@ -30,13 +30,8 @@ export default function Main2() {
   localStorage.setItem('name', playerName)
   if (!isSimple) {
     socket = initSocket(window)
-    socket.on('connected', () => {
-      socket.emit('initClient', { playerName, data: _.find(data.list, e => e.type === 'bullet') }, (id, data) => {
-        playerId = id
-        initGame();
-      });
-    })
-    setTimeout(() => {
+
+    const socketId = setTimeout(() => {
       if (!socket.connected) {
         alert('未连接服务器, 启动单机模式');
         socket.close()
@@ -45,6 +40,14 @@ export default function Main2() {
         initGame();
       }
     }, 30000)
+
+    socket.on('connected', () => {
+      socket.emit('initClient', { playerName, data: _.find(data.list, e => e.type === 'bullet') }, (id, data) => {
+        playerId = id
+        initGame();
+        clearTimeout(socketId);
+      });
+    })
   }else {
     addPipe();
     initGame();
