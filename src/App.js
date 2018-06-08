@@ -6,7 +6,7 @@ import Lesson from './canvas_websocket_lesson'
 
 class App extends Component {
   render() {
-    const data = window.location.hash.replace('#', '') || '1';
+    const data = window.location.hash.replace('#', '') || '0';
     return (
       <div className="App">
         {
