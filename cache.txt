@@ -1,0 +1,11 @@
+  /usr/ss707494/project/multiplayerBird
+  nohup node app.js &
+ nohup http-server &
+
+ screen -dmS ss707494
+ screen -r ss707494
+
+ ps -aef | grep node
+
+ nohup http-server &
+

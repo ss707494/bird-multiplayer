@@ -2,9 +2,6 @@
 const server = require('socket.io');
 const _ = require('lodash');
 // var io = server(80);
-//  /usr/ss707494/project/multiplayerBird
-//  nohup node app.js &
-// nohup http-server &
 
 var app = require('express')();
 var http = require('http').Server(app);

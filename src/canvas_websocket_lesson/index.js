@@ -300,11 +300,6 @@ const codeList = [
         '    console.log(\'客户端收到消息:\', \'data\');\n' +
         '  })\n',
   }, {
-    text: 'websocket介绍',
-    content: 'WebSocket是一种在单个TCP连接上进行全双工通讯的协议',
-    code:
-        '',
-    noBut: 1,
   },
 ]
 
