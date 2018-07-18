@@ -148,5 +148,13 @@ const bindEvent = () => {
     var evt = window.navigator.msPointerEnabled ? 'MSPointerDown' : 'touchstart';
     canvas.addEventListener(evt, dealEvent);
   }
+
+  const gameStartBtn = document.getElementById('gameStart');
+  gameStartBtn.addEventListener('click', function (event) {
+    if (socket && socket.connected) {
+      socket.emit('gameStart');
+    }
+  });
+
 }
 

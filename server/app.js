@@ -67,6 +67,11 @@ app.get('/init', function (req, res) {
       }
     })
 
+    socket.on('gameStart', data => {
+      console.log('start.....')
+      state = !state
+    })
+
     socket.emit('connected');
 
   });
