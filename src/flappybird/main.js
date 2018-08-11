@@ -16,7 +16,7 @@ let ctx,
     isSimple,
     playerName,
     playerId,
-    isConected,
+    // isConected,
     socket;
 
 let data = {...adata};
@@ -69,14 +69,12 @@ function main0() {
     }, 30000)
 
     socket.on('connected', () => {
-      if (!isConected) {
-        socket.emit('initClient', {playerName, data: _.find(data.list, e => e.type === 'bullet')}, (id, data) => {
-          playerId = id
-          initGame();
-          clearTimeout(socketId);
-          isConected = !!1;
-        });
-      }
+      socket.emit('initClient', {playerName, data: _.find(data.list, e => e.type === 'bullet')}, (id, data) => {
+        playerId = id
+        initGame();
+        clearTimeout(socketId);
+        // isConected = !!1;
+      });
     })
   } else {
     addPipe();
@@ -165,7 +163,7 @@ const bindEvent = () => {
   initGame.addEventListener('click', function (event) {
     if (socket && socket.connected) {
       socket.emit('initGame');
-      isConected = !!0;
+      // isConected = !!0;
     }
   });
 
