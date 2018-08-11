@@ -7,14 +7,16 @@ import render from './render/index.js'
 import _event from './event/index.js'
 import collision from './collision/index.js'
 import config from './config.js'
+
 window._ = _
 const {f_log, randomInt, getCanvas, alert} = common
-const { touchHandler, eventsList, dealEvents } = _event
+const {touchHandler, eventsList, dealEvents} = _event
 
 let ctx,
     isSimple,
     playerName,
     playerId,
+    isConected,
     socket;
 
 let data = {...adata};
@@ -41,11 +43,12 @@ export default function Main2() {
         element: "input",
       }
     }).then(v => {
-      playerName = v || ('**' + Math.floor(Math.random()*100))
+      playerName = v || ('**' + Math.floor(Math.random() * 100))
       main0();
     })
   })
 }
+
 function main0() {
   // isSimple = !window.confirm("多人模式");
   // isSimple = true
@@ -66,13 +69,17 @@ function main0() {
     }, 30000)
 
     socket.on('connected', () => {
-      socket.emit('initClient', { playerName, data: _.find(data.list, e => e.type === 'bullet') }, (id, data) => {
-        playerId = id
-        initGame();
-        clearTimeout(socketId);
-      });
+      debugger
+      if (!isConected) {
+        socket.emit('initClient', {playerName, data: _.find(data.list, e => e.type === 'bullet')}, (id, data) => {
+          playerId = id
+          initGame();
+          clearTimeout(socketId);
+          isConected = !!1;
+        });
+      }
     })
-  }else {
+  } else {
     addPipe();
     initGame();
   }
@@ -143,7 +150,7 @@ const bindEvent = () => {
         dealEvent(event)
       }
     });
-    canvas.addEventListener('click', dealEvent )
+    canvas.addEventListener('click', dealEvent)
   } else {
     var evt = window.navigator.msPointerEnabled ? 'MSPointerDown' : 'touchstart';
     canvas.addEventListener(evt, dealEvent);
@@ -151,6 +158,12 @@ const bindEvent = () => {
 
   const gameStartBtn = document.getElementById('gameStart');
   gameStartBtn.addEventListener('click', function (event) {
+    if (socket && socket.connected) {
+      socket.emit('gameStart');
+    }
+  });
+  const initGame = document.getElementById('initGame');
+  initGame.addEventListener('click', function (event) {
     if (socket && socket.connected) {
       socket.emit('gameStart');
     }

@@ -28,7 +28,8 @@ app.get('/space--', function (req, res) {
   console.log('space--');
   res.send(''+space);
 })
-app.get('/init', function (req, res) {
+
+function init(req, res) {
   console.log('init');
   io && io.close()
   clearInterval(timeId);
@@ -84,7 +85,9 @@ app.get('/init', function (req, res) {
   });
   res.send();
   return
-})
+}
+
+app.get('/init', init)
 app.get('/', function(req, res){
   res.send('<h1>Hello world</h1>' +
       '<input id="number"/>' +
