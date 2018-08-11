@@ -72,6 +72,10 @@ function init(req, res) {
       console.log('start.....')
       state = !state
     })
+    socket.on('initGame', data => {
+      console.log('initGame.....')
+      init();
+    })
 
     socket.emit('connected');
 
@@ -83,7 +87,7 @@ function init(req, res) {
   http.listen(3001, function(){
     console.log('listening on *:3001');
   });
-  res.send();
+  res && res.send();
   return
 }
 

@@ -69,7 +69,6 @@ function main0() {
     }, 30000)
 
     socket.on('connected', () => {
-      debugger
       if (!isConected) {
         socket.emit('initClient', {playerName, data: _.find(data.list, e => e.type === 'bullet')}, (id, data) => {
           playerId = id
@@ -165,7 +164,8 @@ const bindEvent = () => {
   const initGame = document.getElementById('initGame');
   initGame.addEventListener('click', function (event) {
     if (socket && socket.connected) {
-      socket.emit('gameStart');
+      socket.emit('initGame');
+      isConected = !!0;
     }
   });
 

@@ -33,7 +33,7 @@ class Canvas extends Component {
 					<canvas className="canv" id="canv_f"></canvas>
 				</div>
         <div>
-          <button style={{margin: 'auto', display: 'innet'}} id="gameStart" >gameStart</button>
+          <button style={{margin: '4px auto', display: 'block'}} id="gameStart" >gameStart</button>
           <button style={{margin: 'auto', display: 'block'}} id="initGame" >initGame</button>
         </div>
 			</div>
