@@ -41,7 +41,7 @@ function init(req, res) {
     console.log('a user connected id: ' + socket.id);
     socket.on('initClient', (data, fn) => {
       if (_.findIndex(players, e => e.playerName === data.playerName) > -1) {
-        socket.emit('nameRepeat');
+        // socket.emit('nameRepeat');
         return
       }
       data.playerId = socket.id
